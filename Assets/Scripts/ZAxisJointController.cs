@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 
-public class XAxisJointController : MonoBehaviour
+public class ZAxisJointController : MonoBehaviour
 {
     public float targetVelocity = 2f;  // Set desired sliding speed
     public float positionSpring = 100f; // Spring to keep joint in position
     public float positionDamper = 10000f;  // Damper to slow down movement
-
+    
     private ConfigurableJoint _configurableJoint;
 
     // Start is called before the first frame update
@@ -22,25 +22,25 @@ public class XAxisJointController : MonoBehaviour
         };
 
         // Apply drive to the desired axis
-        //_configurableJoint.xDrive = drive;
-        _configurableJoint.xDrive = drive;
+        _configurableJoint.zDrive = drive;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         // Control Target Position with Input
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.W))
         {
             var newTarget = _configurableJoint.targetPosition;
-            newTarget.x = -newTarget.x;  // Reverse direction
+            newTarget.z = -newTarget.z;  // Reverse direction
             _configurableJoint.targetPosition = newTarget;
             // Control Target Velocity with Input
             var velocity = _configurableJoint.targetVelocity;
-            velocity.x = targetVelocity;
+            velocity.z = targetVelocity;
             _configurableJoint.targetVelocity = velocity;
-        } 
+        }
 
-        
+       
     }
 }
